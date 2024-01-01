@@ -1,0 +1,51 @@
+
+Enoncé de l'exercice :
+
+Système de Gestion des Voitures
+Vous devez concevoir un système de gestion des voitures
+qui permet aux utilisateurs de créer un compte, d'ajouter,
+de supprimer et de modifier des informations sur les voitures.
+Le système devrait utiliser les concepts de programmation en Java
+tels que Swing pour l'interface utilisateur, Socket pour la communication client-serveur,
+JDBC pour la connexion à une base de données, DAO pour l'accès aux données,
+Singleton pour garantir une seule instance de connexion à la base de données,
+Threads pour gérer les opérations concurrentes, etc.
+
+Partie 1 : Connexion et Création de Compte
+Création de Compte : Les utilisateurs doivent pouvoir créer un compte 
+avec un nom d'utilisateur et un mot de passe. Les informations doivent être stockées dans une base de données.
+
+Connexion : Les utilisateurs doivent pouvoir se connecter avec leur nom d'utilisateur et leur mot de passe.
+
+Partie 2 : Gestion des Voitures
+Affichage des Voitures : Une fois connecté, 
+l'utilisateur doit voir la liste des voitures actuellement enregistrées dans la base de données.
+
+Ajout de Voiture : L'utilisateur doit pouvoir ajouter une nouvelle voiture
+ en fournissant des informations telles que la marque, le modèle, l'année, etc.
+
+Modification de Voiture : L'utilisateur doit pouvoir modifier les informations d'une voiture existante.
+
+Suppression de Voiture : L'utilisateur doit pouvoir supprimer une voiture de la liste.
+
+Partie 3 : Gestion de la Connexion à la Base de Données
+Singleton Connection : Utilisez le modèle singleton pour garantir une seule instance de connexion
+ à la base de données dans l'application.
+
+DAO (Data Access Object) : Utilisez un modèle DAO pour encapsuler l'accès à la base de données.
+ Implémentez des méthodes pour les opérations CRUD (Create, Read, Update, Delete) sur les entités de voiture.
+
+Partie 4 : Gestion Concurrente
+Threads : Gérez les opérations concurrentes en utilisant des threads. Par exemple, deux utilisateurs peuvent essayer de modifier la même voiture en même temps.
+Partie 5 : Communication Client-Serveur
+Communication Socket : Utilisez les sockets pour permettre la communication entre le client 
+(interface utilisateur) et le serveur (gestion des données).
+Remarques :
+Vous pouvez utiliser une base de données MySQL pour stocker les informations sur les utilisateurs
+ et les voitures.
+Assurez-vous de traiter les exceptions correctement pour gérer les erreurs potentielles
+ telles que les échecs de connexion à la base de données.
+La conception de l'interface utilisateur (Swing) doit être 
+conviviale et permettre à l'utilisateur d'effectuer toutes les opérations de manière intuitive.
+Cet exercice couvre une gamme de concepts Java avancés tels que 
+la programmation orientée objet, la gestion de base de données, la gestion de la concurrence, et la communication client-serveur. Il peut être mis en œuvre progressivement en suivant les principes de développement par étapes.
