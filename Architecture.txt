@@ -85,25 +85,26 @@ Bien sûr, la méthode handleUserRequest dans la classe UserDAOImpl peut conteni
 java
 Copy code
 public class UserDAOImpl implements UserDAO {
-
-    @Override
+// autre fonction ajouter - login -delete 
+   @Override
     public void handleUserRequest(User user) {
         switch (user.getAction()) {
             case "register":
-                registerUser(user);
+                // Traitement de l'ajout d'utilisateur
+                Ajouter(user);
+                System.out.println("Utilisateur enregistré avec succès !");
                 break;
             case "login":
-                loginUser(user);
+                // Traitement de la connexion
+                if (login(user.getUsername(), user.getPassword())) {
+                    System.out.println("Connexion réussie !");
+                } else {
+                    System.out.println("Échec de la connexion. Vérifiez vos informations.");
+                }
                 break;
-            case "updateProfile":
-                updateProfile(user);
-                break;
-            case "deleteAccount":
-                deleteAccount(user);
-                break;
+            // Ajoutez d'autres cas selon vos besoins
             default:
-                System.out.println("Unknown action");
-                break;
+                System.out.println("Action non reconnue.");
         }
     }
 
