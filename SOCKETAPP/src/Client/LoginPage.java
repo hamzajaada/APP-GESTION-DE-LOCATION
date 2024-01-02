@@ -5,15 +5,20 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import Utils.User;
 
 
 public class LoginPage extends JFrame {
       JLabel LblUsername;
     JLabel LblPassword;
     JTextField UsernameTxt;
-    JTextField PasswordTxt;
+    JPasswordField PasswordTxt;
     JButton BtnLogin;
     JPanel Pane1;
     JPanel Pane2;
@@ -24,17 +29,31 @@ public class LoginPage extends JFrame {
         LblUsername = new JLabel("Username:");
         LblPassword = new JLabel("Password");
         UsernameTxt = new JTextField(20);
-        PasswordTxt = new JTextField(40);
+        PasswordTxt = new JPasswordField(40);
         BtnLogin = new JButton("Login");
         
         BtnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Ajoutez ici la logique pour traiter la connexion
-                String username = UsernameTxt.getText();
-                String password = PasswordTxt.getText();
-                // Utilisez les informations d'identification pour authentifier l'utilisateur
-                // ...
+                try {
+                    Socket s = new Socket("localhost",1234);
+                    ObjectOutputStream os = new ObjectOutputStream(s.getOutputStream());
+                    String username = UsernameTxt.getText();
+                    char[] passwordChars = PasswordTxt.getPassword();
+                    String password = new String(passwordChars);
+                    User us = new User();
+                    us.setUsername(username);
+                    us.setPassword(password);
+                    us.setAction("login");
+                    os.writeObject(us);
+                    os.flush();
+                    os.close();
+                    s.close();
+                    dispose();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                
             }
         });
 

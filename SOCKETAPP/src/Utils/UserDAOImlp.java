@@ -2,6 +2,7 @@ package Utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAOImlp implements UserDAO {
@@ -27,5 +28,46 @@ public class UserDAOImlp implements UserDAO {
             e.printStackTrace();
         }
     }
-    
+    public boolean login(String username, String password) {
+        DbConnection dbconnection = DbConnection.getInstance();
+        Connection con = dbconnection.getConnection();
+        if (con != null) {
+            System.out.println("connected!!!");
+        } else {
+            System.out.println("erreur de connection");
+            return false;
+        }
+
+        String req = "SELECT * FROM utilisateurs WHERE username = ? AND password = ?";
+        try (PreparedStatement stm = con.prepareStatement(req)) {
+            stm.setString(1, username);
+            stm.setString(2, password);
+            try (ResultSet rs = stm.executeQuery()) {
+                return rs.next(); // Si le résultat de la requête n'est pas vide, les informations de connexion sont correctes.
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public void handleUserRequest(User user) {
+        switch (user.getAction()) {
+            case "register":
+                // Traitement de l'ajout d'utilisateur
+                Ajouter(user);
+                System.out.println("Utilisateur enregistré avec succès !");
+                break;
+            case "login":
+                // Traitement de la connexion
+                if (login(user.getUsername(), user.getPassword())) {
+                    System.out.println("Connexion réussie !");
+                } else {
+                    System.out.println("Échec de la connexion. Vérifiez vos informations.");
+                }
+                break;
+            // Ajoutez d'autres cas selon vos besoins
+            default:
+                System.out.println("Action non reconnue.");
+        }
+    }
 }

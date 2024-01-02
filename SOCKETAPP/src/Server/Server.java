@@ -17,22 +17,33 @@ public class Server {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Client connected");
-
-                // Obtention des flux d'entrée
                 ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
-
-                // Lecture de l'objet User
-                User receivedUser;
-                receivedUser = (User) objectInputStream.readObject();
-                System.out.println(receivedUser.getEmail());
-                System.out.println(receivedUser.getUsername());
-                System.out.println(receivedUser.getPassword());
-                System.out.println(receivedUser.getVille());
-                 UserDAO userDao = new UserDAOImlp();
-                 userDao.Ajouter(receivedUser);
-                // Fermeture des flux et de la connexion
-                objectInputStream.close();
-                clientSocket.close();
+                // User receivedUser;
+                // receivedUser = (User) objectInputStream.readObject();
+               
+                // UserDAO userDao = new UserDAOImlp();
+                // userDao.Ajouter(receivedUser);
+                // objectInputStream.close();
+                // clientSocket.close();
+                User receivedUser = (User) objectInputStream.readObject();
+                String action = receivedUser.getAction();
+                
+                UserDAO userDao = new UserDAOImlp();
+                
+                // switch (action) {
+                //     case "register":
+                //         userDao.Ajouter(receivedUser);
+                //         System.out.println("User registered");
+                //         break;
+                //     case "login":
+                //         boolean loginSuccess = userDao.login(receivedUser.getUsername(), receivedUser.getPassword());
+                //         System.out.println("Login: " + (loginSuccess ? "Success" : "Failed"));
+                //         break;
+                //     default:
+                //         System.out.println("Unknown action");
+                //         break;
+                // }
+                userDao.handleUserRequest(receivedUser);
                 
             }
         } catch (IOException e) {
@@ -41,4 +52,5 @@ public class Server {
         }
          
     }
+   
 }

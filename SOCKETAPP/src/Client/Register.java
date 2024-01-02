@@ -51,10 +51,22 @@ public class Register extends JFrame {
             user.setEmail(Email);
             user.setPassword(Password);
             user.setVille(Vile);
+            user.setAction("register");
             os.writeObject(user);
             os.flush();
             os.close();
             s.close();
+            UsernameTxt.setText(" ");
+            EmailTxt.setText(" ");
+            PasswordTxt.setText(" ");
+            VilleTxt.setText(" ");
+            // Registration successful, close the registration window
+            dispose();
+
+            // Open the login window
+            LoginPage log = new LoginPage();
+            log.setVisible(true);
+
         } catch (IOException e1) { 
             e1.printStackTrace();
         }
