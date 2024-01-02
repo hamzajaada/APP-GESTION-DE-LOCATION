@@ -1,0 +1,5 @@
+les taches : 
+-Creer un Voiture.java
+-Creer VoitureDao
+-Creer VoitureDaoImpl
+-Creer interface qui contient les listes de voiture  avec quatre button ajouter - supprimer - modifier - chercher
