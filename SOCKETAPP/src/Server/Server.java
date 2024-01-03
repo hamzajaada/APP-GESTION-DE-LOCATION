@@ -5,6 +5,9 @@ import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import Utils.Car;
+import Utils.CarDao;
+import Utils.CarDaoImpl;
 import Utils.User;
 import Utils.UserDAO;
 import Utils.UserDAOImlp;
@@ -20,15 +23,21 @@ public class Server {
                 ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
                 // User receivedUser;
                 // receivedUser = (User) objectInputStream.readObject();
-               
+                UserDAO userDAO = new UserDAOImlp();
+                CarDao carDAO = new CarDaoImpl();
+                Object receivedObject = objectInputStream.readObject(); // Méthode à implémenter
+                if (receivedObject instanceof User) {
+                    userDAO.handleUserRequest((User) receivedObject);
+                } else if (receivedObject instanceof Car) {
+                    carDAO.handleCarRequest((Car) receivedObject);
+                }
                 // UserDAO userDao = new UserDAOImlp();
                 // userDao.Ajouter(receivedUser);
                 // objectInputStream.close();
                 // clientSocket.close();
-                User receivedUser = (User) objectInputStream.readObject();
-                String action = receivedUser.getAction();
-                
-                UserDAO userDao = new UserDAOImlp();
+                // User receivedUser = (User) objectInputStream.readObject();
+                // String action = receivedUser.getAction();
+                // UserDAO userDao = new UserDAOImlp();
                 
                 // switch (action) {
                 //     case "register":
@@ -43,7 +52,7 @@ public class Server {
                 //         System.out.println("Unknown action");
                 //         break;
                 // }
-                userDao.handleUserRequest(receivedUser);
+                // userDao.handleUserRequest(receivedUser);
                 
             }
         } catch (IOException e) {

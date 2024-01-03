@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import Client.Home;
+import Client.LoginPage;
+
 public class UserDAOImlp implements UserDAO {
 
     @Override
@@ -35,6 +38,7 @@ public class UserDAOImlp implements UserDAO {
             System.out.println("connected!!!");
         } else {
             System.out.println("erreur de connection");
+
             return false;
         }
 
@@ -61,8 +65,10 @@ public class UserDAOImlp implements UserDAO {
                 // Traitement de la connexion
                 if (login(user.getUsername(), user.getPassword())) {
                     System.out.println("Connexion réussie !");
+                    new Home();
                 } else {
                     System.out.println("Échec de la connexion. Vérifiez vos informations.");
+                    new LoginPage();
                 }
                 break;
             // Ajoutez d'autres cas selon vos besoins

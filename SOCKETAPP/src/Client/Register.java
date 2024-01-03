@@ -62,7 +62,6 @@ public class Register extends JFrame {
             VilleTxt.setText(" ");
             // Registration successful, close the registration window
             dispose();
-
             // Open the login window
             LoginPage log = new LoginPage();
             log.setVisible(true);

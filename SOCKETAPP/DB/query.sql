@@ -12,3 +12,6 @@ CREATE TABLE IF NOT EXISTS utilisateurs (
     ville VARCHAR(255),
     password VARCHAR(255) NOT NULL
 );
+
+
+
